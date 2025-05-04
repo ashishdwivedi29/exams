@@ -1,0 +1,8 @@
+1.login vuforia 
+2.generate database and image upload
+3.download sdk and own package(for unity)
+4.copy licensec key
+5. in unity add sdk and package
+6.add ar camera and image tracker
+7.image tracker to database image upload
+8.ar camera licenc key at the end
