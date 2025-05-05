@@ -1,0 +1,157 @@
+🔥 Problem Statement 2:
+“Create a scene, where a candle is lit (with shadows and smoke), on mouse click using Unity.”
+
+This task involves:
+
+Making a candle object.
+
+Adding a flame (particle system) and smoke.
+
+Adding a point light to simulate illumination.
+
+Enabling the flame/light/smoke on mouse click.
+
+🧱 STEP 1: Set Up Your Basic Scene
+Open a new or existing 3D Scene in Unity.
+
+Add a Plane:
+
+Right-click Hierarchy → 3D Object → Plane (ground)
+
+Add a Candle (placeholder):
+
+Use a Cylinder (Right-click → 3D Object → Cylinder) → Rename it to Candle
+
+Resize it: Scale Y = 1.5, X/Z = 0.2
+
+Optionally place a small sphere on top as wax wick
+
+Create an Empty GameObject above the candle → name it CandleTop
+
+💡 STEP 2: Add Flame and Light (Particle + Light)
+🔥 Flame:
+Right-click CandleTop → Effects → Particle System
+
+Rename it to Flame
+
+Adjust these settings for realistic candle flame:
+
+Duration: 1, Looping: ✅
+
+Start Lifetime: ~0.5
+
+Start Speed: ~0.5
+
+Start Size: ~0.3
+
+Start Color: Yellow/Orange Gradient
+
+Emission Rate: ~30
+
+Shape: Cone → Angle = 10, Radius = 0.1
+
+Disable "Play On Awake" (so it doesn’t start by default)
+
+💨 Smoke:
+Duplicate Flame → Rename it Smoke
+
+Change its settings:
+
+Start Color: Gray/Light Gray
+
+Start Size: ~0.5
+
+Start Speed: ~0.3
+
+Start Lifetime: ~1.5
+
+Use noise module for drifting effect
+
+Lower emission rate (~10)
+
+Disable "Play On Awake"
+
+💡 Light Source:
+Right-click CandleTop → Light → Point Light
+
+Rename it to CandleLight
+
+Set properties:
+
+Intensity = 2
+
+Range = 5
+
+Color = Warm (orange/yellow)
+
+Cast Shadows = ✅
+
+Disable CandleLight by default (uncheck enabled)
+
+💻 STEP 3: Scripting the Candle Lighting
+Create a C# script → name it CandleToggle
+
+Attach it to the Candle object or an empty GameObject
+
+Open and write:
+
+csharp
+Copy
+Edit
+using UnityEngine;
+
+public class CandleToggle : MonoBehaviour
+{
+    public ParticleSystem flame;
+    public ParticleSystem smoke;
+    public Light candleLight;
+
+    private bool isLit = false;
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (!isLit)
+            {
+                flame.Play();
+                smoke.Play();
+                candleLight.enabled = true;
+            }
+            else
+            {
+                flame.Stop();
+                smoke.Stop();
+                candleLight.enabled = false;
+            }
+
+            isLit = !isLit;
+        }
+    }
+}
+🧩 STEP 4: Assign References
+Select the GameObject with the CandleToggle script.
+
+In the Inspector, assign:
+
+Flame → the flame particle system
+
+Smoke → the smoke particle system
+
+CandleLight → the point light
+
+🧪 STEP 5: Test the Scene
+Press Play in Unity.
+
+Click the mouse — the candle should light up with flame, smoke, and warm light.
+
+Click again — it should turn off.
+
+🌟 Optional Enhancements
+Use a realistic candle prefab from the Asset Store.
+
+Add flickering to the light with a script.
+
+Use animation or audio (e.g., spark sound when lit).
+
+Add shadows on nearby objects for better visual impact.

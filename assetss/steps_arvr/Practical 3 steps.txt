@@ -1,0 +1,117 @@
+🎭 Problem Statement 3:
+“Change a character's emotion (Neutral → Happy → Sad → Angry, etc.) using Unity.”
+
+This involves:
+
+A 3D character (model or placeholder)
+
+Multiple facial expressions (via textures, materials, blend shapes, or swapping objects)
+
+A script to switch emotions on mouse click
+
+🧱 STEP 1: Set Up the Scene
+Open Unity → Create a new 3D Scene or use an existing one.
+
+Add a character:
+
+Option 1: Use a simple 3D face model or cube as a placeholder
+
+Option 2: Use a free 3D character from Unity Asset Store (like Unity-Chan, Mixamo, or ReadyPlayerMe)
+
+Position the camera to focus on the face.
+
+🎨 STEP 2: Prepare Emotions
+Option A: Using Textures (Easy for Practical Exam)
+Create 4 different materials or textures representing:
+
+Neutral face
+
+Happy face (smile)
+
+Sad face (tears, frown)
+
+Angry face (red tone, angry brows)
+
+How:
+Create 4 materials: NeutralMat, HappyMat, SadMat, AngryMat
+
+Assign different textures/images to each
+
+Apply them to the same 3D face
+
+📁 (You can create basic faces using MS Paint, GIMP, or Photoshop if needed)
+
+Option B: Blend Shapes (Advanced)
+If using a 3D model with blend shapes (like from Blender or Mixamo):
+
+Create blend shapes for smile, frown, brows down, etc.
+
+Use script to adjust blend shape weights on click
+
+Let me know if you want this version instead.
+
+💻 STEP 3: Script to Change Emotions
+Create a new C# script → EmotionSwitcher.cs
+
+Attach it to the character GameObject
+
+Code:
+
+csharp
+Copy
+Edit
+using UnityEngine;
+
+public class EmotionSwitcher : MonoBehaviour
+{
+    public Material neutralMat;
+    public Material happyMat;
+    public Material sadMat;
+    public Material angryMat;
+
+    private Renderer rend;
+    private int state = 0;
+
+    void Start()
+    {
+        rend = GetComponent<Renderer>();
+        rend.material = neutralMat;
+    }
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            state = (state + 1) % 4;
+
+            switch (state)
+            {
+                case 0:
+                    rend.material = neutralMat;
+                    break;
+                case 1:
+                    rend.material = happyMat;
+                    break;
+                case 2:
+                    rend.material = sadMat;
+                    break;
+                case 3:
+                    rend.material = angryMat;
+                    break;
+            }
+        }
+    }
+}
+🧩 STEP 4: Assign Materials
+Select the character in the scene
+
+In the Inspector:
+
+Assign NeutralMat, HappyMat, SadMat, and AngryMat to the script fields
+
+🧪 STEP 5: Test It
+Press Play
+
+Click the mouse → character’s face/emotion cycles between:
+
+Neutral → Happy → Sad → Angry → Neutral...

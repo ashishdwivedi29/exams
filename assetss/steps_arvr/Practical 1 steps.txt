@@ -1,0 +1,136 @@
+1. 
+ Turn day scene into a night scene on mouse click in Unity.    tell me how to do it in unity in detail
+
+
+
+2/2
+
+ChatGPT said:
+Great, Vedant! Here's a step-by-step guide to implement the AR/VR practical task:
+“Turn a day scene into a night scene on mouse click in Unity.”
+
+✅ OVERVIEW
+You will:
+
+Set up a basic scene with lighting and skybox (Day)
+
+Create a "Night" version of lighting and skybox
+
+Use C# script to switch between Day and Night on mouse click
+
+🎮 STEP 1: Set Up Your Day Scene
+Open Unity (3D project)
+
+Add some objects to visualize the lighting:
+
+Right-click in Hierarchy → 3D Object → Plane (as ground)
+
+Add a Cube or Sphere for reference
+
+Setup Directional Light (Sunlight):
+
+Unity already has a "Directional Light" — rename it to Sun
+
+Set:
+
+Intensity = 1
+
+Color = Light Yellow or White
+
+Set Day Skybox:
+
+Go to Window → Rendering → Lighting → Environment
+
+Under Skybox Material, choose a bright sky (e.g., Skybox/Procedural or default)
+
+🌃 STEP 2: Prepare Night Scene Elements
+🔷 A. Create a Night Skybox:
+Use Unity’s built-in Skybox/Procedural
+
+Or download a Night Skybox from Asset Store
+
+Create a new material:
+
+Right-click in Project → Create → Material → Name it NightSky
+
+Shader → Skybox → Procedural
+
+Set Sun Size = 0, Atmosphere Thickness = ~1.2
+
+Tint Color → Dark Blue
+
+🔷 B. Duplicate Directional Light Settings for Night:
+In script, you'll reduce Sun.intensity to a low value like 0.2
+
+Optionally, you can change its color to deep blue
+
+🧠 STEP 3: Create a Script to Toggle Day/Night
+Create a script:
+
+Right-click in Project → Create → C# Script → Name it DayNightToggle
+
+Attach it to an empty GameObject in your scene (e.g., GameObject → "SceneController")
+
+Edit the script:
+
+csharp
+Copy
+Edit
+using UnityEngine;
+
+public class DayNightToggle : MonoBehaviour
+{
+    public Light sunLight; // Assign your directional light here
+    public Material daySkybox;
+    public Material nightSkybox;
+
+    private bool isDay = true;
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0)) // Left mouse click
+        {
+            if (isDay)
+            {
+                // Switch to Night
+                RenderSettings.skybox = nightSkybox;
+                sunLight.intensity = 0.2f;
+                sunLight.color = Color.blue;
+            }
+            else
+            {
+                // Switch to Day
+                RenderSettings.skybox = daySkybox;
+                sunLight.intensity = 1.0f;
+                sunLight.color = Color.white;
+            }
+
+            isDay = !isDay;
+        }
+    }
+}
+🎛 STEP 4: Assign the References
+Select SceneController GameObject
+
+In the Inspector for DayNightToggle script:
+
+Drag your Directional Light to Sun Light
+
+Drag your Day Skybox material to Day Skybox
+
+Drag your Night Skybox material to Night Skybox
+
+🧪 STEP 5: Test the Scene
+Press Play in Unity
+
+Click anywhere in the game view
+
+The scene should toggle between day and night
+
+📌 OPTIONAL ENHANCEMENTS
+Add stars or moon in night mode
+
+Play sound effects during transition
+
+Gradually transition lighting using Lerp for smoother change
+

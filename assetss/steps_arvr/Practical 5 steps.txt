@@ -1,0 +1,109 @@
+
+
+🏀 Problem Statement 5:
+“Simulate a bouncing ball in Unity. The bouncing should stop gradually after the time specified by the user.”
+
+This involves:
+
+A ball using physics (Rigidbody + Collider)
+
+Gravity causing it to bounce on a surface
+
+A script to gradually reduce bounce height over a given time
+
+🧱 STEP 1: Scene Setup
+Create a new 3D Scene in Unity
+
+Add the following:
+
+Plane → Ground surface
+
+Right-click → 3D Object → Plane → Rename: Ground
+
+Sphere → Ball
+
+Right-click → 3D Object → Sphere → Rename: Ball
+
+Position it at Y = 5 (above ground)
+
+Add Rigidbody to the Ball
+
+Inspector → Add Component → Rigidbody
+
+🔄 STEP 2: Add a Physics Material for Bounciness
+In the Project window → Right-click → Create → Physics Material → Name: BouncyMat
+
+Set:
+
+Bounciness = 1
+
+Friction Combine = Minimum
+
+Bounce Combine = Maximum
+
+Assign this material to the Ball's Collider:
+
+Select Ball → Sphere Collider → Material → assign BouncyMat
+
+This allows the ball to bounce repeatedly without losing energy at first.
+
+💻 STEP 3: Create the Bounce Control Script
+Create a new C# script → Name: BounceController.cs
+
+Attach it to the Ball
+
+Add the following code:
+
+csharp
+Copy
+Edit
+using UnityEngine;
+
+public class BounceController : MonoBehaviour
+{
+    private Rigidbody rb;
+    private float timer = 0f;
+    public float stopTime = 5f; // user-defined time in seconds
+    private PhysicMaterial bouncyMat;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+
+        // Get and clone the physics material
+        SphereCollider col = GetComponent<SphereCollider>();
+        bouncyMat = new PhysicMaterial();
+        bouncyMat.bounciness = 1f;
+        bouncyMat.bounceCombine = PhysicMaterialCombine.Maximum;
+        col.material = bouncyMat;
+    }
+
+    void Update()
+    {
+        if (timer < stopTime)
+        {
+            timer += Time.deltaTime;
+
+            // Gradually reduce bounciness
+            float remaining = Mathf.Clamp01(1 - (timer / stopTime));
+            bouncyMat.bounciness = remaining;
+        }
+        else
+        {
+            bouncyMat.bounciness = 0f; // Completely stop bouncing
+        }
+    }
+}
+🧪 STEP 4: Test It
+In the Inspector, set stopTime (e.g., 5 seconds)
+
+Press Play
+
+The ball will:
+
+Bounce actively at first
+
+Gradually lose bounce height
+
+Come to rest after stopTime seconds
+

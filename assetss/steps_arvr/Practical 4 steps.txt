@@ -1,0 +1,96 @@
+⚽️ Problem Statement 4:
+“Depict a scene of the effect of kicking a ball in Unity (at 3 various speeds).”
+
+You'll simulate:
+
+A ball in a 3D scene
+
+Three different kick speeds
+
+User clicking a button or pressing a key to kick the ball at a chosen speed
+
+🧱 STEP 1: Scene Setup
+Create a 3D Scene in Unity.
+
+Add:
+
+Plane → as ground
+
+Hierarchy → Right-click → 3D Object → Plane → Rename to Ground
+
+Sphere → as ball
+
+Hierarchy → 3D Object → Sphere → Rename to Ball
+
+Position it slightly above ground (e.g., Y = 0.5)
+
+Add a RigidBody component to the ball:
+
+Select Ball → Inspector → Add Component → Rigidbody
+
+Add a wall or cube at a distance so you can see how far the ball travels.
+
+🎯 STEP 2: Create the Kick Script
+Create a C# script → name it BallKicker.cs
+
+Attach it to the Ball
+
+✅ Script Code:
+csharp
+Copy
+Edit
+using UnityEngine;
+
+public class BallKicker : MonoBehaviour
+{
+    private Rigidbody rb;
+
+    public float lowSpeed = 5f;
+    public float mediumSpeed = 10f;
+    public float highSpeed = 20f;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1)) // Press 1
+        {
+            KickBall(lowSpeed);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2)) // Press 2
+        {
+            KickBall(mediumSpeed);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3)) // Press 3
+        {
+            KickBall(highSpeed);
+        }
+    }
+
+    void KickBall(float force)
+    {
+        rb.velocity = Vector3.zero; // reset previous motion
+        rb.angularVelocity = Vector3.zero;
+        rb.AddForce(transform.forward * force, ForceMode.Impulse);
+    }
+}
+🧩 STEP 3: Align the Ball
+Rotate the Ball (or scene) so that transform.forward points toward the direction you want to kick (Z-axis by default).
+
+Optionally, add a visible target or goal in that direction.
+
+🧪 STEP 4: Testing the Scene
+Press Play
+
+Press:
+
+1 → Low-speed kick
+
+2 → Medium-speed kick
+
+3 → High-speed kick
+
+Observe the difference in how far and fast the ball moves.

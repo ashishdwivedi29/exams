@@ -1,0 +1,101 @@
+📚 Problem Statement 6:
+“Create a 3D model of a reading table and props required on it, and set up lighting for the same using Unity.”
+
+This task involves:
+
+Creating or importing a reading table
+
+Adding props (e.g., books, lamp, pen, notebook)
+
+Setting up lighting for realistic appearance
+
+🧱 STEP 1: Create the Scene
+Open Unity → Create a new 3D Scene
+
+Add a Plane (floor):
+
+Hierarchy → Right-click → 3D Object → Plane → Rename it Floor
+
+Scale it as needed (e.g., Scale = (3, 1, 3))
+
+🪑 STEP 2: Create the Reading Table
+🔨 Option A: Manual Table Creation (Using Primitives)
+Table Top:
+
+Right-click → 3D Object → Cube → Rename it TableTop
+
+Scale: (2, 0.1, 1)
+
+Position: (0, 1, 0)
+
+Legs (4 Cubes):
+
+Create one cube → Scale: (0.1, 1, 0.1)
+
+Position it under the tabletop at each corner (adjust positions manually)
+
+Duplicate the leg (Ctrl+D) three times to make all 4 legs
+
+📦 STEP 3: Add Props
+You can either:
+
+Use Unity's built-in cubes and shapes to simulate props
+
+Or import free models from Asset Store or Sketchfab
+
+🔲 Use Primitives as Props (for practical simplicity)
+Book: Cube (Scale = (0.5, 0.05, 0.4), color it dark red)
+
+Notebook: Cube (Scale = (0.4, 0.03, 0.3), white or blue)
+
+Pen: Cylinder (Scale = (0.05, 0.05, 0.5), rotate and place diagonally)
+
+Lamp: Use:
+
+Cylinder for stand
+
+Sphere or cone for lamp head (rotate downward)
+
+📦 Tip: Group the lamp using an empty GameObject as parent → makes positioning easier.
+
+💡 STEP 4: Set Up Lighting
+1. Add Light Source
+Hierarchy → Right-click → Light → Point Light or Spot Light
+
+Position it just above the lamp
+
+Adjust:
+
+Range = 3–5
+
+Intensity = 2–5
+
+Color = soft yellow
+
+2. Enable Shadows
+Select the light
+
+Check Shadows → Soft Shadows
+
+Adjust Shadow Strength to 0.5–0.8
+
+3. Global Light (optional)
+Keep or adjust Directional Light to simulate daylight, but reduce intensity if you're going for a night/indoor look
+
+🎨 STEP 5: Add Materials
+Apply colors or textures:
+
+Create Materials (Right-click in Project → Create → Material)
+
+Apply colors/textures to table, books, lamp, etc.
+
+Optional:
+
+Use Unity's URP/Lit shader for better material control (metallic, smoothness, etc.)
+
+🧪 STEP 6: Test and Polish
+Play the scene
+
+Navigate with Scene camera to review lighting
+
+Move camera to get a nice top-down or side perspective
